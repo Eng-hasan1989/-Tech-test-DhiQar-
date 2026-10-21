@@ -95,12 +95,13 @@
 
             <div class="modal-body">
                 <form id="registrationForm" onsubmit="handleSubmit(event)">
+                    <!-- حقل الاسم الرباعي -->
                     <div class="form-group">
                         <label>الاسم الرباعي</label>
                         <input type="text" id="fullName" required>
                     </div>
 
-                    <!-- حقل رقم الهاتف المضاف حديثاً -->
+                    <!-- حقل رقم الهاتف -->
                     <div class="form-group">
                         <label>رقم الهاتف</label>
                         <input type="text" id="phoneNumber" required placeholder="07xxxxxxxx">
@@ -190,7 +191,7 @@
             const formData = {
                 specialty: currentSpecialty,
                 fullName: document.getElementById('fullName').value,
-                phoneNumber: document.getElementById('phoneNumber').value, // <--- إرسال رقم الهاتف
+                phoneNumber: document.getElementById('phoneNumber').value,
                 generalSpec: document.getElementById('generalSpec').value,
                 exactSpec: document.getElementById('exactSpec').value,
                 affiliation: document.getElementById('affiliation').value,
@@ -200,9 +201,13 @@
                 hasCourse: document.getElementById('hasTeachingCourse').checked
             };
 
+            // تم تصحيح mode: 'no-cors' بحروف صغيرة لتجاوز قيود المتصفح وإرسال البيانات بسلاسة
             fetch(SCRIPT_URL, {
-                method: 'Mode-No-Cors',
-                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
                 body: JSON.stringify(formData)
             })
             .then(() => {
